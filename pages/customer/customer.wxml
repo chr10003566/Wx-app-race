@@ -1,0 +1,128 @@
+<!--pages/customer/customer.wxml-->
+<view class="tab-header">
+  <view class="tab-item" >
+    <view class="tab-item {{curTab == 0 ? 'cur' : ''}}" bindtap='changeTab' data-curtab="0">地块定位</view>
+    <view class="tab-item {{curTab == 1 ? 'cur' : ''}}" bindtap='changeTab' data-curtab="1">种植品种</view>
+    <view class="tab-item {{curTab == 2 ? 'cur' : ''}}" bindtap='changeTab' data-curtab="2">土地肥力</view>
+    <view class="tab-item {{curTab == 3 ? 'cur' : ''}}" bindtap='changeTab' data-curtab="3">施肥条件</view>
+  </view>
+</view>
+  <view class="content" style="height:{{ch}}rpx;">
+  <swiper class="swiper" bindchange='swiperChange' current='{{curTab}}'>
+    <swiper-item>
+      <scroll-view scroll-y class="scroll" wx:if="{{curTab == 0}}">
+        <view class="map-event-container">
+          <view class="map-event-content">
+            <view class="tip">第一个tab</view>
+            <view class="map_container">
+              <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" 
+              markers="{{markers}}"
+              scale="15" 
+              show-location="true" bindtap="onTapMap" enable-3D="true" 
+              enable-rotate 
+              enable-satellite></map>
+            </view>
+            <view class="feature-container">
+            <view class="feature-content">
+              <icon class="feture-img"></icon>
+              <text class="feture-label">坐标</text>
+              <text class="feture-txt">{{coordinate_txt}}</text>
+            </view>
+
+            <view class="feature-content">
+              <icon class="feture-img"></icon>
+              <text class="feture-label">地名</text>
+              <text class="feture-txt">{{place_txt}}</text>
+            </view>
+
+            <view class="feature-content">
+              <icon class="feture-img"></icon>
+              <text class="feture-label">地址</text>
+              <text class="feture-txt">{{address_txt}}</text>
+            </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+
+    <swiper-item>
+      <scroll-view scroll-y class="scroll" wx:if="{{curTab == 1}}">
+      
+        <t-popup visible="{{raceNameVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
+          <view class="my-popup">
+            <view class='tree-select-container'>
+              <t-tree-select class="my-tree-select" options="{{raceNameOptions}}" value="{{value}}  "bind:change="onRaceNameChange" />
+            </view>
+          </view>
+        </t-popup>
+
+        <t-popup visible="{{raceTypeVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
+          <view class="my-popup">
+            <view class='tree-select-container'>
+              <t-tree-select class="my-tree-select" options="{{raceTypeOptions}}" value="{{value}}  "bind:change="onRaceTypeChange" />
+            </view>
+          </view>
+        </t-popup>
+
+        <t-popup visible="{{raceMethodVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
+          <view class="my-popup">
+            <view class='tree-select-container'>
+              <t-tree-select class="my-tree-select" options="{{raceMethodOptions}}" value="{{value}}  "bind:change="onRaceMethodChange" />
+            </view>
+          </view>
+        </t-popup>
+      
+        <view class="title">品种信息</view>
+        <t-input label="水稻类型" placeholder="请选取" value="{{raceName}}" align="right">
+          <t-button id="race-name" slot="suffix" theme="primary" size="extra-small" bind:tap="handlePopup"> 选取 </t-button>
+        </t-input>
+        <t-input label="早中晚" placeholder="请选取" align="right">
+          <t-button id="race-type" slot="suffix" theme="primary" size="extra-small" bind:tap="handlePopup"> 选取 </t-button>
+        </t-input>
+        <t-input label="品种名称" placeholder="请输入品种名称" align="right"></t-input>
+        <t-input label="目标参量" placeholder="请输入数值" type="number" align="right"></t-input>
+        
+        <view class="title">种植信息</view>
+        <t-input label="种植方式" placeholder="请选取" align="right">
+          <t-button id="race-method" slot="suffix" theme="primary" size="extra-small"  bind:tap="handlePopup"> 选取 </t-button>
+        </t-input>
+        <t-input label="种植时间" data-mode="raceTime" placeholder="请点选日期" value="{{raceTimeText || ''}}" align="right" focus="{{raceTimeVisible}}" bindtap="showPicker">
+        </t-input>
+        <t-date-time-picker
+          title="选择日期"
+          visible="{{raceTimeVisible}}"
+          mode="date"
+          defaultValue="{{raceDate}}"
+          format="YYYY-MM-DD"
+          bindchange="onConfirm"
+          bindpick="onColumnChange"
+          bindcancel="hidePicker"
+          start="{{raceDateStart}}"
+          end="{{raceDateEnd}}"
+        />
+        <t-input label="种植生育期" placeholder="请选取" align="right">
+          <t-button slot="suffix" theme="primary" size="extra-small"> 选取 </t-button>
+        </t-input>
+        <view class="title">收获信息</view>
+        <t-input label="种植时间" placeholder="请点选日期" align="right">
+          
+        </t-input>
+      </scroll-view>
+    </swiper-item>
+
+    <swiper-item>
+      <scroll-view scroll-y class="scroll" wx:if="{{curTab == 2}}">
+        <view class="tip">第三个tab</view>
+          
+      </scroll-view>
+    </swiper-item>
+
+    <swiper-item>
+      <scroll-view scroll-y class="scroll" wx:if="{{curTab == 3}}">
+        <view class="tip">第三个tab</view>
+          
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>
