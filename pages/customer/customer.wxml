@@ -37,7 +37,7 @@
         <t-popup visible="{{raceNameVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
           <view class="my-popup">
             <view class='tree-select-container'>
-              <t-tree-select class="my-tree-select" options="{{raceNameOptions}}" value="{{value}}" bind:change="onRaceNameChange" />
+              <t-tree-select class="my-tree-select" height="auto" options="{{raceNameOptions}}" value="{{raceNameValue}}" bind:change="onRaceNameChange" />
             </view>
           </view>
         </t-popup>
@@ -45,7 +45,7 @@
         <t-popup visible="{{raceTypeVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
           <view class="my-popup">
             <view class='tree-select-container'>
-              <t-tree-select class="my-tree-select" options="{{raceTypeOptions}}" value="{{value}}" bind:change="onRaceTypeChange" />
+              <t-tree-select class="my-tree-select" height="auto" options="{{raceTypeOptions}}" value="{{raceTypeValue}}" bind:change="onRaceTypeChange" />
             </view>
           </view>
         </t-popup>
@@ -53,26 +53,35 @@
         <t-popup visible="{{raceMethodVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
           <view class="my-popup">
             <view class='tree-select-container'>
-              <t-tree-select class="my-tree-select" options="{{raceMethodOptions}}" value="{{value}}" bind:change="onRaceMethodChange" />
+              <t-tree-select height="auto" class="my-tree-select" options="{{raceMethodOptions}}" value="{{raceMethodValue}}" bind:change="onRaceMethodChange" />
             </view>
           </view>
         </t-popup>
-      
+
+        <t-popup visible="{{racePeriodVisible}}" bind:visible-change="onVisibleChange" placement="bottom">
+          <view class="my-popup">
+            <view class='tree-select-container'>
+              <t-tree-select height="auto" class="my-tree-select" options="{{racePeriodOptions}}" value="{{racePeriodValue}}" bind:change="onRacePeriodChange" />
+            </view>
+          </view>
+        </t-popup>
+        
         <view class="title">品种信息</view>
-        <t-input label="水稻类型" placeholder="请选取" value="{{raceName}}" align="right">
+        <t-input label="水稻类型" t-class-label="external-input-label" placeholder="请选取" value="{{raceName}}" align="right">
           <t-button id="race-name" slot="suffix" theme="primary" size="extra-small" bind:tap="handlePopup"> 选取 </t-button>
         </t-input>
         <t-input label="早中晚" placeholder="请选取" value="{{raceType}}" align="right">
           <t-button id="race-type" slot="suffix" theme="primary" size="extra-small" bind:tap="handlePopup"> 选取 </t-button>
         </t-input>
-        <t-input label="品种名称" placeholder="请输入品种名称" align="right"></t-input>
-        <t-input label="目标参量" placeholder="请输入数值" type="number" align="right"></t-input>
+        <t-input label="品种名称" placeholder="请输入品种名称" suffix-icon="edit-1" align="right"></t-input>
+        <t-input label="目标产量" t-class-label="external-input-label"  placeholder="请输入数值" suffix-icon="edit-1" type="number" align="right"></t-input>
         
         <view class="title">种植信息</view>
-        <t-input label="种植方式" placeholder="请选取" value="{{raceMethod}}" align="right">
+        <t-input label="种植方式" t-class-label="external-input-label"  placeholder="请选取" value="{{raceMethod}}" align="right">
           <t-button id="race-method" slot="suffix" theme="primary" size="extra-small"  bind:tap="handlePopup"> 选取 </t-button>
         </t-input>
-        <t-input label="种植时间" data-mode="raceTime" placeholder="请点选日期" value="{{raceTimeText || ''}}" align="right" focus="{{raceTimeVisible}}" bindtap="showPicker">
+      
+        <t-input label="种植时间" t-class-label="external-input-label" suffix-icon="time" data-mode="raceTime" placeholder="请点选日期" value="{{raceTimeText || ''}}" align="right" disabled="{{true}}" bindtap="showPicker">
         </t-input>
         <t-date-time-picker
           title="选择日期"
@@ -86,29 +95,39 @@
           start="{{raceDateStart}}"
           end="{{raceDateEnd}}"
         />
-        <t-input label="种植生育期" placeholder="请选取" align="right">
-          <t-button slot="suffix" theme="primary" size="extra-small"> 选取 </t-button>
+        <t-input label="种植生育期" t-class-label="external-input-label" placeholder="请选取" align="right"  value="{{racePeriod}}">
+          <t-button id="race-period" slot="suffix" theme="primary" size="extra-small" bind:tap="handlePopup"> 选取 </t-button>
         </t-input>
         <view class="title">收获信息</view>
-        <t-input label="种植时间" placeholder="请点选日期" align="right">
-          
+        <t-input label="预计收获时间" t-class-label="external-input-label" suffix-icon="time" data-mode="harvestTime" placeholder="请点选日期" value="{{harvestTimeText || ''}}" align="right" disabled="{{true}}" bindtap="showPicker">
         </t-input>
+        <t-date-time-picker
+          title="选择日期"
+          visible="{{harvestTimeVisible}}"
+          mode="date"
+          defaultValue="{{raceDate}}"
+          format="YYYY-MM-DD"
+          bindchange="onConfirm"
+          bindpick="onColumnChange"
+          bindcancel="hidePicker"
+          start="{{raceDateStart}}"
+          end="{{raceDateEnd}}"
+        />
       </scroll-view>
     </swiper-item>
 
     <swiper-item>
       <scroll-view scroll-y class="scroll" wx:if="{{curTab == 2}}">
         <view class="title">地块信息</view>
-        <t-input label="地块名称" placeholder="请自定义名称" value="{{landName}}" align="right"></t-input>
+        <t-input label="地块名称" t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请自定义名称" value="{{landName}}" align="right"></t-input>
 
         <view class="title">土壤信息</view>
-        <t-input label="地块名称" placeholder="请自定义名称" value="{{landName}}" align="left"></t-input>
-        <t-input label="有机质" placeholder="请输入数值" value="{{landName}}" align="left"></t-input>
-        <t-input label="pH值" placeholder="请输入数值" value="{{phValue}}" align="left"></t-input>
-        <t-input label="全氮(g/kg)" placeholder="请输入数值" value="{{NValue}}" align="left"></t-input>
-        <t-input label="无机氮(g/kg)" placeholder="请输入数值" value="{{landName}}" align="left"></t-input>
-        <t-input label="速效磷(g/kg)" placeholder="请输入数值" value="{{landName}}" align="left"></t-input>
-        <t-input label="速效钾(g/kg)" placeholder="请输入数值" value="{{landName}}" align="left"></t-input>
+        <t-input label="有机质" t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请输入数值" value="{{landName}}" align="right"></t-input>
+        <t-input label="pH值"t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请输入数值" value="{{phValue}}" align="right"></t-input>
+        <t-input label="全氮(g/kg)"t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请输入数值" value="{{NValue}}" align="right"></t-input>
+        <t-input label="无机氮(g/kg)"t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请输入数值" value="{{landName}}" align="right"></t-input>
+        <t-input label="速效磷(g/kg)"t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请输入数值" value="{{landName}}" align="right"></t-input>
+        <t-input label="速效钾(g/kg)"t-class-label="external-input-label" suffix-icon="edit-1" placeholder="请输入数值" value="{{landName}}" align="right"></t-input>
           
       </scroll-view>
     </swiper-item>

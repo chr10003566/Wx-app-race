@@ -13,10 +13,15 @@ Page({
     raceName: "",
     raceType: "",
     raceMethod: "",
+    racePeriod: "",
     raceNameOptions: getApp().globalData.raceNameData,
     raceTypeOptions: getApp().globalData.raceTypeData,
     raceMethodOptions: getApp().globalData.raceMethodData,
-    value:['0', '0-0'],
+    racePeriodOptions: getApp().globalData.racePeriodData,
+    raceNameValue:['0', '0-0'],
+    raceTypeValue:['0', '0-0'],
+    raceMethodValue:['0', '0-0'],
+    racePeriodValue:['0', '0-0'],
     raceDate: new Date('2021-12-23').getTime(), 
     raceTimeText: "",
     raceDateStart: '2000-01-01 00:00:00',
@@ -74,6 +79,7 @@ Page({
     var raceNameVisible_tmp;
     var raceTypeVisible_tmp;
     var raceMethodVisible_tmp;
+    var racePeriodVisible_tmp;
     
     switch (button_id)
     {
@@ -85,6 +91,10 @@ Page({
         break;
       case "race-method":
         raceMethodVisible_tmp = true;
+        break;
+      case "race-period":
+        racePeriodVisible_tmp = true;
+        break;
       default:
         break;
     }
@@ -96,7 +106,8 @@ Page({
         this.setData({ 
           raceNameVisible: raceNameVisible_tmp,
           raceTypeVisible: raceTypeVisible_tmp,
-          raceMethodVisible: raceMethodVisible_tmp
+          raceMethodVisible: raceMethodVisible_tmp,
+          racePeriodVisible: racePeriodVisible_tmp
         });
       },
     );
@@ -105,33 +116,46 @@ Page({
     this.setData({
       raceNameVisible: e.detail.visible,
       raceTypeVisible: e.detail.visible,
-      raceMethodVisible: e.detail.visible
+      raceMethodVisible: e.detail.visible,
+      racePeriodVisible: e.detail.visible
     });
   },
   onRaceNameChange(e) {
-    var raceNameValue = e.detail.value;
-    var selectedLabel = getApp().findLabelByValue(raceNameValue[1], this.data.raceNameOptions);
+    var raceNameValue_tmp = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(raceNameValue_tmp[1], this.data.raceNameOptions);
     this.setData({
+      raceNameValue: e.detail.value,
       raceName: selectedLabel
     });
   },
   onRaceTypeChange(e) {
-    var raceTypeValue = e.detail.value;
-    var selectedLabel = getApp().findLabelByValue(raceTypeValue[1], this.data.raceTypeOptions);
+    var raceTypeValue_tmp = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(raceTypeValue_tmp[1], this.data.raceTypeOptions);
     this.setData({
+      raceTypeValue: e.detail.value,
       raceType: selectedLabel
     });
   },
   onRaceMethodChange(e) {
-    var raceMethodValue = e.detail.value;
-    var selectedLabel = getApp().findLabelByValue(raceMethodValue[1], this.data.raceMethodOptions);
+    var raceMethodValue_tmp = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(raceMethodValue_tmp[1], this.data.raceMethodOptions);
     this.setData({
+      raceMethodValue: e.detail.value,
       raceMethod: selectedLabel
+    });
+  },
+  onRacePeriodChange(e) {
+    var racePeriodValue_tmp = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(racePeriodValue_tmp[1], this.data.racePeriodOptions);
+    this.setData({
+      racePeriodValue: e.detail.value,
+      racePeriod: selectedLabel
     });
   },
 
   showPicker(e) {
     const { mode } = e.currentTarget.dataset;
+    console.log(mode);
     this.setData({
       mode,
       [`${mode}Visible`]: true,
