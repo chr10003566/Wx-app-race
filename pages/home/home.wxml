@@ -1,2 +1,13 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<t-cell
+  title="Cui"
+  description=""
+  align="top"
+  image="https://tdesign.gtimg.com/miniprogram/images/cell1.png"
+  hover
+  bordered="{{false}}"
+/>
+
+<t-grid border="{{border}}" class="block" column="{{2}}">
+  <t-grid-item image="{{img1}}" />
+  <t-grid-item image="{{img2}}" />
+</t-grid>

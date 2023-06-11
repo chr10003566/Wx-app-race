@@ -43,8 +43,6 @@
 
 .map-event-content {
   background: #FFF;
-  padding: 20px 0 0;
-  margin-top: 5px;
   width: 100%;
 }
 
@@ -54,34 +52,10 @@
   position:relative;
 }
 
-.feature-container {
-	background: #fff;
-}
-
-.feature-content {
-	padding-right: 20px;
-  height: 56px;
-  display: flex;
-	justify-content: space-between;
-	line-height: 56px;
-}
-
-.feature-label {
-	padding-right: 10px;
-  font-size: 14px;
-	color: #222;
-	white-space: nowrap;
-}
-
-.feature-txt {
-	display:flex;
-	flex: 1;
-	justify-content: flex-end;
-	align-items: center;
-	line-height: 20px;
-  font-size: 14px;
-	color:rgba(34,34,34,0.5);
-	word-break: break-all;
+.external-cell-title
+{
+  white-space: nowrap;
+  padding-right: 40px;
 }
 
 .title{

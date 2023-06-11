@@ -1,2 +1,13 @@
-<!--pages/mydata/mydata.wxml-->
-<text>pages/mydata/mydata.wxml</text>
+<!--pages/home/home.wxml-->
+<view class="example-search">
+  <t-search
+    value="{{value}}"
+    left
+    placeholder="搜索"
+    action="{{actionText}}"
+    bind:blur="blurHandle"
+    bind:focus="focusHandle"
+    bind:action-click="actionHandle"
+    bind:change="changeHandle"
+  />
+</view>

@@ -11,6 +11,8 @@ Page({
     curTab: 0,
     markers: [],
     raceName: "",
+    raceType: "",
+    raceMethod: "",
     raceNameOptions: getApp().globalData.raceNameData,
     raceTypeOptions: getApp().globalData.raceTypeData,
     raceMethodOptions: getApp().globalData.raceMethodData,
@@ -107,15 +109,27 @@ Page({
     });
   },
   onRaceNameChange(e) {
-    console.log(e)
-    // var raceNameValue = e.detail.value;
-    // console.log(raceNameValue)
-    // var selectedLabel = getApp().findLabelByValue(raceNameValue[1], this.data.raceNameOption);
-    
+    var raceNameValue = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(raceNameValue[1], this.data.raceNameOptions);
     this.setData({
-      
+      raceName: selectedLabel
     });
   },
+  onRaceTypeChange(e) {
+    var raceTypeValue = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(raceTypeValue[1], this.data.raceTypeOptions);
+    this.setData({
+      raceType: selectedLabel
+    });
+  },
+  onRaceMethodChange(e) {
+    var raceMethodValue = e.detail.value;
+    var selectedLabel = getApp().findLabelByValue(raceMethodValue[1], this.data.raceMethodOptions);
+    this.setData({
+      raceMethod: selectedLabel
+    });
+  },
+
   showPicker(e) {
     const { mode } = e.currentTarget.dataset;
     this.setData({

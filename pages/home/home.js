@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    img1: "../../../img/user.png",
+    img2: "../../../img/email.png",
+    border: {
+      color: '#f6f6f6',
+    },
   },
 
   /**
